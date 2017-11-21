@@ -49,6 +49,11 @@ footer {
   width: 25px;
 }
 
+.associatedImg {
+  height: 200px;
+  width: 250px;
+}
+
 .form-control, .btn {
   width: 90%
 }

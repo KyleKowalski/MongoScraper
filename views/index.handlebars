@@ -1,24 +1,24 @@
 <div class="text-center">
-    {{!-- <img class="imgMain" src='assets/img/burger.png'> --}}
     <h1>Mongo Scraper - just because...</h1>
     <h3>So we currently have <i>TODO ADD NUMBER</i> saved articles - let's scrape some more.</h3>
-{{!-- 
-        <ul>
-        {{#each burgers }}
-        <row>
-            <li>{{burger_name}} - 
-                {{#if burger_eaten}}Click the grill to make another! (>>> that's a grill>>>){{else}}Looks Delicious, right?{{/if}} 
-                {{#if burger_eaten}}  
-                <img class="toggleEatBurger smallImg" burgerId="{{burger_id}}" burgerEaten="{{burger_eaten}}" title="Make another of this burger!" src="https://cdn3.iconfinder.com/data/icons/4th-of-july-1/64/Grill-128.png">
-                {{else}}  
-                <img class="toggleEatBurger smallImg" burgerId="{{burger_id}}" burgerEaten="{{burger_eaten}}" title="Mmmm eat the burger!" src="https://cdn4.iconfinder.com/data/icons/simple-lines-2/32/Packman_Game_Character_Leisure_Eat_Smile-128.png">
-                {{/if}} - 
-                <a href="/burger/{{burger_id}}"><img class="updateBurger smallImg" burgerId="{{burger_id}}" title="Make the burger MORE delicious!" src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/pencil-square-o-128.png"></a> - 
-                <img class="deleteBurger smallImg" burgerId="{{burger_id}}" title="This burger isn't so good - GOODBYE!" src="https://cdn4.iconfinder.com/data/icons/social-media-2082/32/Os_X-128.png">
-            </li>
-        </row>
+
+    <button id="scrapeNow" class="btn btn-success">Scrape Pictures For Your Next Vacation!</button>
+
+        <table class="text-center" style="width:100%" border="1x solid black">
+            <tr>
+                <th class="text-center">Description</th>
+                <th class="text-center">Picture</th>
+                <th class="text-center">Buttons</th>
+                <th class="text-center">Buttons</th>
+            </tr>
+        {{#each vacationSpots }}
+            <tr>
+            <td class="text-center">{{locationDescription}}</td>
+            <td class="text-center"><img src="{{image}}" class="associatedImg"></td>
+            <td class="col-xs-1 yesVote" targetId="{{dataValues.id}}"><img class="smallImg" title="I like it!" src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/ok_circle-128.png"></td> 
+            <td class="col-xs-1 noVote" targetId="{{dataValues.id}}"><img class="smallImg" title="Hmmm, pass..." src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/cancel_circle-128.png"></td>
+            </tr>
         {{/each}}
-        </ul> --}}
- 
-    <button id="scrapeNow" class="btn btn-success">Scrape the NY Times!</button>
+        </table>
+    
 </div>

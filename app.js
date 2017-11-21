@@ -1,12 +1,14 @@
-var express = require('express');
-var exphbs  = require('express-handlebars');
-var path = require('path');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const express = require('express');
+const exphbs  = require('express-handlebars');
+const path = require('path');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/vacationScraper');
 
-var routes = require('./routes/routes');
+const routes = require('./routes/routes');
 
-var app = express();
+const app = express();
 // var PORT = process.env.PORT || 8080;
 
 // view engine setup
