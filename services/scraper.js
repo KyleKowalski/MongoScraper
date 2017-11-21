@@ -1,14 +1,14 @@
 const cheerio = require("cheerio");
 const request = require("request");
-const VacationSpot = require('../models/vacationSpot');
+const RedditArticle = require('../models/redditArticle');
 
 function scrapeTargetWebsite() {
     console.log(`SCRRAAAPPPIINNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG`);
     
     // clean it out so we can start again
-    VacationSpot.collection.drop();
+    RedditArticle.collection.drop(); // TODO fix this.
 
-    request("https://www.pexels.com/search/vacation/", (error, response, html) => {
+    request("http://www.reddit.com", (error, response, html) => {
         
         // Load the HTML into cheerio and save it to a variable
         // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
@@ -16,15 +16,21 @@ function scrapeTargetWebsite() {
 
         // With cheerio, find each p-tag with the "title" class
         // (i: iterator. element: the current element)
-        $("article").each((i, element) => {
+        $(".thing").each((i, element) => {
 
-            var articleText = $(element).find("a").find("img").attr("alt");
-            var imgLink = $(element).find("a").find("img").attr("srcset").split(",")[0].split(" ")[0].split("?")[0];
+            let articleTitle = $(element).find("a.title").text();
+            let articleLink = $(element).find("a.title").attr("href");
+
+            if (articleLink.startsWith("/r/")){
+                articleLink = "https://www.reddit.com" + articleLink;
+            }
+            let thumbnail = $(element).find(".thumbnail").find("img").attr("src");
 
             // Save these results in an object that we'll push into the results array we defined earlier
-            VacationSpot.collection.insert({
-                locationDescription: articleText,
-                image: imgLink
+            RedditArticle.collection.insert({
+                articleTitle: articleTitle,
+                articleLink: articleLink,
+                thumbnail: thumbnail
             });
         });
     });

@@ -4,12 +4,11 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/vacationScraper');
+mongoose.connect('mongodb://localhost/redditArticles');
 
 const routes = require('./routes/routes');
 
 const app = express();
-// var PORT = process.env.PORT || 8080;
 
 // view engine setup
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));

@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const scraper = require('../services/scraper');
-const VacationSpot = require('../models/vacationSpot');
+const db = require('../models/');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  VacationSpot.find({})
+  db.RedditArticle.find({})
   .then(function(data){
     console.log(data);
-    res.render('index', { vacationSpots: data, title: 'Express',  });
+    res.render('index', { redditArticle: data, title: 'Express',  });
   });
 });
 
