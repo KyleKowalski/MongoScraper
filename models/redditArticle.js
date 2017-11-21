@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 const redditArticleSchema = new Schema({
-    articleTitle: { type: String },
+    articleTitle: { 
+      type: String,
+      unique: true
+     },
     articleLink: { type: String },
     thumbnail: { type: String },
     notes: [

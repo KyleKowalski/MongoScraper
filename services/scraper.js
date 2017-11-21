@@ -6,7 +6,7 @@ function scrapeTargetWebsite() {
     console.log(`SCRRAAAPPPIINNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG`);
     
     // clean it out so we can start again
-    RedditArticle.collection.drop(); // TODO fix this.
+    // RedditArticle.collection.drop(); // TODO fix this.
 
     request("http://www.reddit.com", (error, response, html) => {
         
@@ -27,11 +27,11 @@ function scrapeTargetWebsite() {
             let thumbnail = $(element).find(".thumbnail").find("img").attr("src");
 
             // Save these results in an object that we'll push into the results array we defined earlier
-            RedditArticle.collection.insert({
-                articleTitle: articleTitle,
-                articleLink: articleLink,
-                thumbnail: thumbnail
-            });
+            RedditArticle.collection.update(
+                {articleTitle: articleTitle},
+                {$set: {articleLink: articleLink, thumbnail: thumbnail}},
+                {upsert: true}
+            );
         });
     });
 }
