@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 if (process.env.MONGODB_URI) {
-	mongoose.connect(process.env.MONGODB_URI)
+	mongoose.connect('mongodb://heroku_5r0nxv1l:Luca1234@ds115866.mlab.com:15866/heroku_5r0nxv1l')
 } else {
 	mongoose.connect('mongodb://localhost/redditArticles');
 }
