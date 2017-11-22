@@ -4,7 +4,12 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/redditArticles');
+
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI)
+} else {
+	mongoose.connect('mongodb://localhost/redditArticles');
+}
 
 const routes = require('./routes/routes');
 
