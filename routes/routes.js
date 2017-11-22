@@ -5,10 +5,12 @@ const db = require('../models/');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  db.RedditArticle.find({}).sort({dateAdded: 1})
-  .then(function(data){
-    res.render('index', { redditArticle: data, title: 'Express',  });
-  });
+  db.RedditArticle.find({})
+    .populate('notes')
+    .then(function(articles){
+      console.log(articles);
+      res.render('index', { redditArticle: articles, title: 'Express',  });
+    });
 });
 
 router.get('/scrapeNow', function(req, res){
@@ -61,6 +63,15 @@ router.delete('/removeArticle/:id', function(req, res){
   console.log(`removing article id: ${req.params.id}`);
 
   db.RedditArticle.findByIdAndRemove(req.params.id)
+  .then(function(){
+    res.json("success");
+  });
+});
+
+router.delete('/removeNote/:id', function(req, res){
+  console.log(`removing note id: ${req.params.id}`);
+
+  db.Note.findByIdAndRemove(req.params.id)
   .then(function(){
     res.json("success");
   });

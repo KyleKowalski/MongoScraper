@@ -61,8 +61,18 @@ $(document).ready(function() {
             type: "DELETE",
             url: "/removeArticle/" + $(this).attr("targetId"),
             success: location.reload()
-        })
-    })
+        });
+    });
+
+    $(".deleteOneNote").on("click", function(){
+        console.log(`Removing Note id: ` + $(this).attr("targetId"));
+
+        $.ajax({
+            type: "DELETE",
+            url: "/removeNote/" + $(this).attr("targetId"),
+            success: location.reload()
+        });
+    });
 
 
 }); // end document.ready
