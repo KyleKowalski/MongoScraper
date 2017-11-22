@@ -40,7 +40,7 @@ router.post('/addNote/:id', function(req, res){
     console.log(`we just created this note: `);
     console.log(dbNote);
     console.log(`we are updating this article id: '${req.params.id}'`);
-    db.redditArticle.findOneAndUpdate(
+    return db.RedditArticle.findOneAndUpdate(
       { _id: req.params.id }, 
       { $push: { notes: dbNote._id } }, 
       { new: true });
@@ -48,7 +48,6 @@ router.post('/addNote/:id', function(req, res){
   .then(function(dbRedditArticle) {
     console.log(`We're in reddit article after note`);
     console.log(dbRedditArticle);
-    // If the User was updated successfully, send it back to the client
     res.json(dbRedditArticle);
   })
   .catch(function(err) {

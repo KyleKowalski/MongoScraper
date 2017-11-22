@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const noteSchema = new Schema({
+var NoteSchema = new Schema({
     noteText: { type: String },
     dateAdded: { type: Date, default: Date.now }
   });
 
-const Note = mongoose.model('Note', noteSchema);
+var Note = mongoose.model("Note", NoteSchema);
 
 module.exports = Note;

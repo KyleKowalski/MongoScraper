@@ -1,22 +1,17 @@
 const mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const redditArticleSchema = new Schema({
-    articleTitle: { 
+var RedditArticleSchema = new Schema({
+    articleTitle: { type: String },
+    articleLink: { 
       type: String,
       unique: true
-     },
-    articleLink: { type: String },
+      },
     thumbnail: { type: String },
-    note: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Note"
-      }
-    ],
+    notes: [{ type: Schema.Types.ObjectId, ref: "Note" }],
     dateAdded: { type: Date, default: Date.now }
   });
 
-const RedditArticle = mongoose.model('RedditArticle', redditArticleSchema);
+var RedditArticle = mongoose.model("RedditArticle", RedditArticleSchema);
 
 module.exports = RedditArticle;
