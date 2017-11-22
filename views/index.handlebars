@@ -6,21 +6,51 @@
     <hr>
     <button id="deleteAll" class="btn btn-danger">Delete ALLLLL the articles!</button>
     <hr>
-        <table class="text-center" style="width:100%" border="1x solid black">
+        <table class="text-center" style="width:90%" border="1x solid black">
             <tr>
                 <th class="text-center">Description</th>
                 <th class="text-center">Thumbnail</th>
-                <th class="text-center">Add Note</th>
+                <th class="text-center">Add/View Note(s)</th>
                 <th class="text-center">Remove Article</th>
             </tr>
         {{#each redditArticle }}
             <tr>
             <td class="text-center"><a href="{{articleLink}}" target="new" title="Last Updated: {{dateAdded}}">{{articleTitle}}</a></td>
             <td class="text-center col-xs-1"><img src="{{thumbnail}}" class="associatedImg"></td>
-            <td class="addNote col-xs-1" targetId="{{_id}}"><img class="smallImg" title="Add Note" src="https://cdn3.iconfinder.com/data/icons/essential-pack-2/48/7-Communication-128.png"></td> 
+            <td class="addNote col-xs-1" targetId="{{_id}}" articleTitle="{{articleTitle}}"><img class="smallImg" title="Add Note" src="https://cdn3.iconfinder.com/data/icons/essential-pack-2/48/7-Communication-128.png"></td> 
             <td class="deleteArticle col-xs-1" targetId="{{_id}}"><img class="smallImg" title="Remove Article" src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/cancel_circle-128.png"></td>
             </tr>
         {{/each}}
         </table>
     
+    <div class="modal fade text-center" style="width=80%" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <h1>You've chosen to add a note!</h1>
+                <h1>Wow, go you!</h1>
+                <h3 id="articleChoice"></h3>
+                <input id="noteToAdd" type="text" class="form-control" placeholder="Enter note here...">
+                <button id="addThisNote" type="button" class="btn btn-primary">Add this note!</button>
+                <hr>
+                <h3>Here are previous notes for this article:</h3>
+                {{!-- <table class="text-center" style="width:90%" border="1x solid black">
+                    <tr>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Thumbnail</th>
+                        <th class="text-center">Add/View Note(s)</th>
+                        <th class="text-center">Remove Article</th>
+                    </tr>
+                    {{#each redditArticle.note }}
+                        <tr>
+                        <td class="text-center"><a href="{{articleLink}}" target="new" title="Last Updated: {{dateAdded}}">{{articleTitle}}</a></td>
+                        <td class="text-center col-xs-1"><img src="{{thumbnail}}" class="associatedImg"></td>
+                        <td class="addNote col-xs-1" targetId="{{_id}}" articleTitle="{{articleTitle}}"><img class="smallImg" title="Add Note" src="https://cdn3.iconfinder.com/data/icons/essential-pack-2/48/7-Communication-128.png"></td> 
+                        <td class="deleteArticle col-xs-1" targetId="{{_id}}"><img class="smallImg" title="Remove Article" src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/cancel_circle-128.png"></td>
+                        </tr>
+                    {{/each}}
+                </table> --}}
+            </div>
+        </div>
+    </div>
+
 </div>

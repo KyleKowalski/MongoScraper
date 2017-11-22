@@ -19,14 +19,43 @@ router.get('/scrapeNow', function(req, res){
 router.get('/deleteAll', function(req, res){
   console.log(`deleting all`);
   // clean it out so we can start again
+  db.Note.collection.drop()
+  .then(function(){
+    res.json("notes deleted - now for articles");
+  });
+
   db.RedditArticle.collection.drop()
   .then(function(){
-    res.redirect('/');
+    res.json("articles deleted - now for a refresh");
+    // might need to location redirect here.
   });
+  
 });
 
-router.put('/addNote/:id', function(req, res){
-  console.log(`adding note to id: ${id}`)
+router.post('/addNote/:id', function(req, res){
+  console.log(`adding note to id: ${req.params.id} - note is: '${req.body.thisNote}'`);
+  db.Note
+  .create({ noteText: req.body.thisNote })
+  .then(function(dbNote) {
+    console.log(`we just created this note: `);
+    console.log(dbNote);
+    console.log(`we are updating this article id: '${req.params.id}'`);
+    db.redditArticle.findOneAndUpdate(
+      { _id: req.params.id }, 
+      { $push: { notes: dbNote._id } }, 
+      { new: true });
+  })
+  .then(function(dbRedditArticle) {
+    console.log(`We're in reddit article after note`);
+    console.log(dbRedditArticle);
+    // If the User was updated successfully, send it back to the client
+    res.json(dbRedditArticle);
+  })
+  .catch(function(err) {
+    console.log(`something blew up - we're not in reddit article anymore`);
+    // If an error occurs, send it back to the client
+    res.json(err);
+  });
 });
 
 router.delete('/removeArticle/:id', function(req, res){

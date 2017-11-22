@@ -8,7 +8,7 @@ const redditArticleSchema = new Schema({
      },
     articleLink: { type: String },
     thumbnail: { type: String },
-    notes: [
+    note: [
       {
         type: Schema.Types.ObjectId,
         ref: "Note"

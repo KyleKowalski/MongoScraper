@@ -24,15 +24,35 @@ $(document).ready(function() {
     });
 
     $(".addNote").on("click", function(){
-        console.log(`Adding note to id: ` + $(this).attr("targetId"));
+        let targetId = $(this).attr("targetId");
+        $("#addThisNote").attr("currentId", targetId);
+        $("#noteModal").modal('toggle');
+        $("#articleChoice").text("Adding note to article titled: " + $(this).attr("articleTitle"))
 
+    });
+
+    $("#addThisNote").on("click", function(){
+        let thisNote = $("#noteToAdd").val();
+        
+        if(thisNote === "" || thisNote === null){
+            alert("Please enter a note to continue");
+            return false;
+        }
+
+        let thisNoteObject = {
+            thisNote: thisNote
+        }
+        
         $.ajax({
-            type: "PUT", 
-            url: "/addNote/" + $(this).attr("targetId"),
-            data: "thisDataHere",
+            type: "POST", 
+            url: "/addNote/" + $(this).attr("currentId"),
+            data: JSON.stringify(thisNoteObject),
+            dataType: 'json',
+            contentType: 'application/json',
             success: location.reload()
         })
-    });
+
+    })
 
     $(".deleteArticle").on("click", function(){
         console.log(`Removing Article id: ` + $(this).attr("targetId"));

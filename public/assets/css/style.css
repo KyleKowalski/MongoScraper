@@ -10,6 +10,11 @@ html, body {
   min-width: 340px;
 }
 
+table {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 .navbar, footer {
   background-color:rgb(165, 171, 195);
   height:70px; 
@@ -55,4 +60,8 @@ footer {
 
 .form-control, .btn {
   width: 90%
+}
+
+#addThisNote {
+  margin-bottom: 3%;
 }
