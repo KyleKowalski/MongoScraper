@@ -3,11 +3,6 @@ const request = require("request");
 const RedditArticle = require('../models/redditArticle');
 
 function scrapeTargetWebsite() {
-    console.log(`SCRRAAAPPPIINNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG`);
-    
-    // clean it out so we can start again
-    // RedditArticle.collection.drop(); // TODO fix this.
-
     request("http://www.reddit.com", (error, response, html) => {
         
         // Load the HTML into cheerio and save it to a variable
@@ -28,8 +23,8 @@ function scrapeTargetWebsite() {
 
             // Save these results in an object that we'll push into the results array we defined earlier
             RedditArticle.collection.update(
-                {articleTitle: articleTitle},
-                {$set: {articleLink: articleLink, thumbnail: thumbnail}},
+                {articleLink: articleLink},
+                {$set: {articleTitle: articleTitle, thumbnail: thumbnail, dateAdded: Date.now()}},
                 {upsert: true}
             );
         });

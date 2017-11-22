@@ -3,7 +3,9 @@
     <h3>So we currently have {{redditArticle.length}} saved articles - let's scrape some more.</h3>
 
     <button id="scrapeNow" class="btn btn-success">This is fun - let's scrape Reddit again!</button>
-
+    <hr>
+    <button id="deleteAll" class="btn btn-danger">Delete ALLLLL the articles!</button>
+    <hr>
         <table class="text-center" style="width:100%" border="1x solid black">
             <tr>
                 <th class="text-center">Description</th>
@@ -13,10 +15,10 @@
             </tr>
         {{#each redditArticle }}
             <tr>
-            <td class="text-center"><a href="{{articleLink}}" target="new">{{articleTitle}}</a></td>
-            <td class="text-center"><img src="{{thumbnail}}" class="associatedImg"></td>
-            <td class="col-xs-1 yesVote" targetId="{{dataValues.id}}"><img class="smallImg" title="Add Note" src="https://cdn3.iconfinder.com/data/icons/essential-pack-2/48/7-Communication-128.png"></td> 
-            <td class="col-xs-1 noVote" targetId="{{dataValues.id}}"><img class="smallImg" title="Remove Article" src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/cancel_circle-128.png"></td>
+            <td class="text-center"><a href="{{articleLink}}" target="new" title="Last Updated: {{dateAdded}}">{{articleTitle}}</a></td>
+            <td class="text-center col-xs-1"><img src="{{thumbnail}}" class="associatedImg"></td>
+            <td class="addNote col-xs-1" targetId="{{_id}}"><img class="smallImg" title="Add Note" src="https://cdn3.iconfinder.com/data/icons/essential-pack-2/48/7-Communication-128.png"></td> 
+            <td class="deleteArticle col-xs-1" targetId="{{_id}}"><img class="smallImg" title="Remove Article" src="https://cdn2.iconfinder.com/data/icons/arrows-and-universal-actions-icon-set/256/cancel_circle-128.png"></td>
             </tr>
         {{/each}}
         </table>

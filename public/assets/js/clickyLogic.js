@@ -13,5 +13,36 @@ $(document).ready(function() {
         });
     });
 
+    $("#deleteAll").on("click", function(){
+        console.log(`deleting all`);
+
+        $.ajax({
+            type: "GET",
+            url: "/deleteAll",
+            success:  console.log('success')
+        });
+    });
+
+    $(".addNote").on("click", function(){
+        console.log(`Adding note to id: ` + $(this).attr("targetId"));
+
+        $.ajax({
+            type: "PUT", 
+            url: "/addNote/" + $(this).attr("targetId"),
+            data: "thisDataHere",
+            success: location.reload()
+        })
+    });
+
+    $(".deleteArticle").on("click", function(){
+        console.log(`Removing Article id: ` + $(this).attr("targetId"));
+
+        $.ajax({
+            type: "DELETE",
+            url: "/removeArticle/" + $(this).attr("targetId"),
+            success: location.reload()
+        })
+    })
+
 
 }); // end document.ready
